@@ -19,10 +19,9 @@
  │  │  │  └── ...
  │  │  ├── README.md
  │  │  └── CMakeLists.txt
- │  ├── ModelFlow/
+ │  ├── ModelBuild/
  │  │  ├── build/
  │  │  ├── include/
- │  │  ├── lib/
  │  │  ├── src/
  │  │  ├── out/
  │  │  │  ├── Data/
