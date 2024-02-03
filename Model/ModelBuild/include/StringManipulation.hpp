@@ -50,4 +50,19 @@ void removeNonFilename(std::string &path)
     path = extractFilename(CONST_PATH);
 }
 
+void to_lower_str(std::string &cleaned)
+{
+    // Convert the string to lowercase.
+    std::transform(cleaned.begin(), cleaned.end(), cleaned.begin(), [](unsigned char c)
+                   { return std::tolower(c); });
+}
+
+void to_lower_vec(std::vector<std::string> &string_vector)
+{
+    for (auto &word : string_vector)
+    {
+        to_lower_str(word);
+    }
+}
+
 #endif
