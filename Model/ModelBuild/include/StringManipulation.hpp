@@ -65,4 +65,32 @@ void to_lower_vec(std::vector<std::string> &string_vector)
     }
 }
 
+std::string cleanString(std::string dirty)
+{
+    std::string cleaned;
+    std::ifstream rem("../configs/removechars.txt");
+    std::string symbols_line;
+
+    while (std::getline(rem, symbols_line))
+    {
+        for (char c : dirty)
+        {
+            // Check if the character is in the symbols string.
+            if (symbols_line.find(c) != std::string::npos)
+            {
+                // Replace the character with a whitespace.
+                cleaned += ' ';
+            }
+            else
+            {
+                // Append the character to the new string.
+                cleaned += c;
+            }
+        }
+    }
+
+    to_lower_str(cleaned);
+    return cleaned;
+}
+
 #endif
