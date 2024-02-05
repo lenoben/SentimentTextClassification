@@ -93,4 +93,64 @@ std::string cleanString(std::string dirty)
     return cleaned;
 }
 
+bool removeStop(std::vector<std::string> &DatasetList)
+{
+    // Read stop words from file
+    std::ifstream stopWordsFile("../configs/stopwords.txt");
+    if (!stopWordsFile.is_open() || !std::filesystem::exists(DatasetList[0]))
+    {
+        return false;
+    }
+
+    std::vector<std::string> stopWords;
+    std::string stopWord;
+    while (stopWordsFile >> stopWord)
+    {
+        stopWords.push_back(stopWord);
+    }
+    stopWordsFile.close();
+    to_lower_vec(stopWords);
+
+    std::ifstream inputFile(DatasetList[0]);
+    std::ofstream outputFile("noStopWord.txt");
+
+    if (!inputFile.is_open() || !outputFile.is_open())
+    {
+        return false;
+    }
+
+    // Process each line in the input file
+    std::string line;
+    while (std::getline(inputFile, line))
+    {
+        std::istringstream iss(line);
+        std::string word;
+
+        // Process each word in the line
+        while (iss >> word)
+        {
+            to_lower_str(word);
+            // Remove punctuation or other unwanted characters
+            word.erase(std::remove_if(word.begin(), word.end(), ::ispunct), word.end());
+
+            // Convert the word to lowercase for case-insensitive comparison
+            std::transform(word.begin(), word.end(), word.begin(), ::tolower);
+
+            // Check if the word is not a stop word and write it to the output file
+            if (std::find(stopWords.begin(), stopWords.end(), word) == stopWords.end())
+            {
+                outputFile << word << " ";
+            }
+        }
+
+        outputFile << '\n';
+    }
+
+    // Close files
+    inputFile.close();
+    outputFile.close();
+    DatasetList[0] = "noStopWord.txt";
+    return true;
+}
+
 #endif
