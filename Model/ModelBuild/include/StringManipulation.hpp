@@ -197,4 +197,16 @@ void combineJsonLineByLine(std::vector<std::string> &DatasetList)
     outputFile.close();
     DatasetList = {"combined.json"};
 }
+
+void saveVectors(std::vector<std::string> &vector, std::string filename)
+{
+    std::ofstream File(filename);
+    std::cout << " Saving to " << filename << std::endl;
+    for (const auto &vectorUnit : vector)
+    {
+        File << vectorUnit << std::endl;
+    }
+    File.close();
+    std::cout << " Saved " << filename << std::endl;
+}
 #endif
