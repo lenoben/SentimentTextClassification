@@ -301,4 +301,34 @@ void sm_convertJsonToTxt(std::string JsonFile, std::vector<std::string> &Dataset
         }
     }
 }
+
+void combineTXT(std::vector<std::string> &DatasetList)
+{
+    // Open a new file to combine the contents
+    std::string newname = (extractFilename(DatasetList[0]) + "_combined.txt");
+    std::ofstream combinedFile(newname);
+
+    for (const auto &fileName : DatasetList)
+    {
+        // Open each input file
+        std::ifstream inputFile(fileName);
+        if (!inputFile.is_open())
+        {
+            std::cerr << "Error opening input file: " << fileName << std::endl;
+            return;
+        }
+
+        // Append the contents of the input file to the combined file
+        combinedFile << inputFile.rdbuf();
+
+        // Close the input file
+        inputFile.close();
+    }
+
+    // Close the combined file
+    combinedFile.close();
+
+    std::cout << "Files combined successfully." << std::endl;
+    DatasetList = {newname};
+}
 #endif
