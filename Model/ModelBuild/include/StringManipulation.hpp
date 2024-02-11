@@ -384,4 +384,24 @@ void categorizeByScore(std::vector<std::string> &DatasetList, int positive)
     highTextFile.close();
     lowTextFile.close();
 }
+
+int countLines(const std::string &fileName)
+{
+    std::ifstream file(fileName);
+    if (!file.is_open())
+    {
+        std::cerr << "Error opening file for line counting: " << fileName << std::endl;
+        return 0;
+    }
+
+    int lineCount = 0;
+    std::string line;
+    while (std::getline(file, line))
+    {
+        ++lineCount;
+    }
+
+    file.close();
+    return lineCount;
+}
 #endif
