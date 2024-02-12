@@ -404,4 +404,23 @@ int countLines(const std::string &fileName)
     file.close();
     return lineCount;
 }
+
+void equalizeLines(const std::string &inputFileName, std::ofstream &output, int n)
+{
+    std::ifstream inputFile(inputFileName);
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Error opening input file for equalization: " << inputFileName << std::endl;
+        return;
+    }
+
+    std::string line;
+    for (int i = 0; i < n; ++i)
+    {
+        std::getline(inputFile, line);
+        output << line << std::endl;
+    }
+
+    inputFile.close();
+}
 #endif
