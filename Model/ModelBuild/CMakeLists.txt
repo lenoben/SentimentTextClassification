@@ -14,7 +14,7 @@ file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_executable(modelBuild ${SOURCES})
 
 # Link libraries
-target_link_libraries(modelBuild PRIVATE -larmadillo -lmlpack)
+target_link_libraries(modelBuild PRIVATE -larmadillo -lz -lmlpack)
 
 # Set compilation flags
 target_compile_options(modelBuild PRIVATE -flto -Wconversion -fopenmp)
