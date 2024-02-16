@@ -6,6 +6,8 @@
 #include <string>
 #include <algorithm>
 
+#include <tuple>
+
 #include <filesystem>
 #include <fstream>
 #include <sstream>
@@ -28,4 +30,30 @@ enum FileType
     TXT
 };
 
+enum EncoderType
+{
+    BOW,
+    TFID
+};
+
+std::string encoderTypeToString(EncoderType type);
+
+enum TheTokenType
+{
+    SPLITBYCHAR,
+    CHAREXTRACT
+};
+
+std::string tokenTypeToString(TheTokenType type);
+
+enum scaler_methods
+{
+    STANDARD_SCALAR,
+    MINMAX_SCALAR,
+    MAX_ABS_SCALAR,
+    MEAN_NORM,
+    NONE
+};
+
+std::string scalerMethodToString(scaler_methods method);
 #endif
