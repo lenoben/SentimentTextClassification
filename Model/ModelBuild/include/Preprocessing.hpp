@@ -12,6 +12,7 @@ public:
     void printType();
     void addList(std::vector<std::string> List);
     void viewList();
+    void Combine();
 
 private:
     Json Dataset = {};

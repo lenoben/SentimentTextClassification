@@ -56,3 +56,44 @@ void Preprocessor::viewList()
     }
     return;
 }
+
+void Preprocessor::Combine()
+{
+    if (FT == FileType::TXTGZ)
+    {
+        std::cerr << "[WARN] " << std::setw(4) << ""
+                  << "No implementation for TXTGZ to combine!\nConvert to Json/Txt before combining" << std::endl;
+        return;
+    }
+    if (FT == FileType::JSON)
+    {
+        if (DatasetList.empty())
+        {
+            std::cerr << "[WARN]" << std::setw(4) << "No Lists of [<filename>].json available" << std::endl;
+            return;
+        }
+        combineJsonLineByLine(DatasetList);
+        return;
+    }
+    if (FT == FileType::TXT)
+    {
+        if (DatasetList.empty())
+        {
+            std::cerr << "[WARN]" << std::setw(4) << "No Lists of [<filename>].txt available" << std::endl;
+            return;
+        }
+        if (DatasetList.size() == 2)
+        {
+            if (DatasetList[0] == "hightext.txt" || DatasetList[0] == "equalhightext.txt" || DatasetList[0] == "train_equalhightext.txt" || DatasetList[0] == "test_equalhightext.txt")
+            {
+                combineTXT(DatasetList);
+                std::cout << "[INFO] " << std::setw(4) << "Combined - " << DatasetList[0] << std::endl;
+            }
+        }
+        // TODO
+        return;
+    }
+    std::cout << "[WARN]" << std::setw(4) << ""
+              << "Invalid!" << std::endl;
+    return;
+}
