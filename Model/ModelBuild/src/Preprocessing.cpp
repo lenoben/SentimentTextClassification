@@ -97,3 +97,39 @@ void Preprocessor::Combine()
               << "Invalid!" << std::endl;
     return;
 }
+
+void Preprocessor::Combine(FileType FileType_to_combine_to)
+{
+    if (FileType_to_combine_to == FileType::TXT)
+    {
+        if (FT == FileType::JSON)
+        {
+            // TODO
+        }
+    }
+}
+
+void Preprocessor::Combine(std::vector<std::string> list)
+{
+    if (DatasetList.empty())
+    {
+        if (!list.empty())
+        {
+            DatasetList = list;
+        }
+        else
+        {
+            std::cerr << "[WARN]" << std::setw(4) << ""
+                      << "Both Lists are empty" << std::endl;
+            return;
+        }
+    }
+    else
+    {
+        // Add two vectors together
+        DatasetList.insert(DatasetList.end(), list.begin(), list.end());
+    }
+
+    Combine();
+    return;
+}
