@@ -15,6 +15,7 @@ public:
     void Combine();
     void Combine(FileType FT);
     void Combine(std::vector<std::string> List);
+    void removeStopWords();
 
 private:
     Json Dataset = {};
