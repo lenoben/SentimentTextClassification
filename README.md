@@ -12,7 +12,6 @@
  │  │  ├── config/
  │  │  ├── build/
  │  │  ├── include/
- │  │  ├── lib/
  │  │  ├── src/
  │  │  ├── out/
  │  │  │  ├── Models/
@@ -20,6 +19,7 @@
  │  │  ├── README.md
  │  │  └── CMakeLists.txt
  │  ├── ModelBuild/
+ │  │  ├── config/
  │  │  ├── build/
  │  │  ├── include/
  │  │  ├── src/
