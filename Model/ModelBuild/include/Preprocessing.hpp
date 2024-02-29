@@ -17,6 +17,7 @@ public:
     void Combine(std::vector<std::string> List);
     void removeStopWords();
     void ConvertTxtgzToTxt(std::string directory);
+    void ConvertTxtgzToJson();
 
 private:
     Json Dataset = {};
