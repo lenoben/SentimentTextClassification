@@ -151,7 +151,7 @@ void Preprocessor::removeStopWords()
     }
 }
 
-void Preprocessor::ConvertTxtgzToTxt(std::string directory = "")
+void Preprocessor::ConvertTxtgzToTxt(std::string directory)
 {
     if (FT != FileType::TXTGZ)
     {

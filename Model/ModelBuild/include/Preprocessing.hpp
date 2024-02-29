@@ -20,7 +20,6 @@ public:
     void ConvertTxtgzToJson();
 
 private:
-    Json Dataset = {};
     FileType FT;
     std::vector<std::string> DatasetList;
 };
