@@ -18,6 +18,7 @@ public:
     void removeStopWords();
     void ConvertTxtgzToTxt(std::string directory);
     void ConvertTxtgzToJson();
+    void ConvertJsonToTxt();
 
 private:
     FileType FT;
