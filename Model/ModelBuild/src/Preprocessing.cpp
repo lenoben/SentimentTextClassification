@@ -215,3 +215,9 @@ void Preprocessor::ConvertJsonToTxt()
         return;
     }
 }
+
+void Preprocessor::dividePositiveandNegative(int positive = 3)
+{
+    // TODO: Check if datasetlist has either text.txt or nostopword.txt and score.txt
+    categorizeByScore(DatasetList, positive);
+}

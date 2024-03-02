@@ -19,6 +19,7 @@ public:
     void ConvertTxtgzToTxt(std::string directory);
     void ConvertTxtgzToJson();
     void ConvertJsonToTxt();
+    void dividePositiveandNegative(int Positive);
 
 private:
     FileType FT;
