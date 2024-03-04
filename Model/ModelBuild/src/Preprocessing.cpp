@@ -226,3 +226,8 @@ void Preprocessor::over_rideList(std::vector<std::string> List)
 {
     DatasetList = List;
 }
+
+void Preprocessor::over_rideFileType(FileType newFT)
+{
+    FT = newFT;
+}

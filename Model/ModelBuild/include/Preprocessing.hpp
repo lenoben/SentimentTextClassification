@@ -21,6 +21,7 @@ public:
     void ConvertJsonToTxt();
     void dividePositiveandNegative(int Positive);
     void over_rideList(std::vector<std::string> list);
+    void over_rideFileType(FileType newFT);
 
 private:
     FileType FT;
