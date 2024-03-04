@@ -221,3 +221,8 @@ void Preprocessor::dividePositiveandNegative(int positive = 3)
     // TODO: Check if datasetlist has either text.txt or nostopword.txt and score.txt
     categorizeByScore(DatasetList, positive);
 }
+
+void Preprocessor::over_rideList(std::vector<std::string> List)
+{
+    DatasetList = List;
+}

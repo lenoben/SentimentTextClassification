@@ -20,6 +20,7 @@ public:
     void ConvertTxtgzToJson();
     void ConvertJsonToTxt();
     void dividePositiveandNegative(int Positive);
+    void over_rideList(std::vector<std::string> list);
 
 private:
     FileType FT;
