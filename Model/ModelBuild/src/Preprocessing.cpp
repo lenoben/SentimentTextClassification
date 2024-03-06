@@ -231,3 +231,13 @@ void Preprocessor::over_rideFileType(FileType newFT)
 {
     FT = newFT;
 }
+
+void Preprocessor::saveEqualdivided()
+{
+    equalizer(DatasetList);
+}
+
+std::vector<std::string> &Preprocessor::getList()
+{
+    return DatasetList;
+}

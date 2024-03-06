@@ -22,6 +22,8 @@ public:
     void dividePositiveandNegative(int Positive);
     void over_rideList(std::vector<std::string> list);
     void over_rideFileType(FileType newFT);
+    void saveEqualdivided();
+    std::vector<std::string> &getList();
 
 private:
     FileType FT;
