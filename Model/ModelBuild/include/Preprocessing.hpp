@@ -24,6 +24,8 @@ public:
     void over_rideFileType(FileType newFT);
     void saveEqualdivided();
     std::vector<std::string> &getList();
+    void train_test_split(double split_number = 0.2);
+    void removech();
 
 private:
     FileType FT;

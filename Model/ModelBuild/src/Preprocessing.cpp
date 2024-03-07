@@ -241,3 +241,53 @@ std::vector<std::string> &Preprocessor::getList()
 {
     return DatasetList;
 }
+
+void Preprocessor::train_test_split(double split_number)
+{
+    if (DatasetList.empty())
+    {
+        return;
+    }
+    std::vector<std::string> newlist;
+    for (const auto &file : DatasetList)
+    {
+        std::string line = "";
+        std::vector<std::string> lines = {};
+        std::ifstream filestream(file);
+        std::ofstream train("train_" + file);
+        newlist.push_back("train_" + file);
+        std::ofstream test("test_" + file);
+        newlist.push_back("test_" + file);
+        if (!filestream)
+        {
+            std::cerr << "Error opening input file: " << file << std::endl;
+            return;
+        }
+        while (std::getline(filestream, line))
+        {
+            lines.push_back(line);
+        }
+        filestream.close();
+        int splitIndex = static_cast<int>(lines.size() * split_number);
+        for (int i = 0; i < lines.size(); ++i)
+        {
+            if (i < splitIndex)
+            {
+                test << lines[i] << std::endl;
+            }
+            else
+            {
+                train << lines[i] << std::endl;
+            }
+        }
+        train.close();
+        test.close();
+        std::cout << file << " split into train and test sets successfully." << std::endl;
+    }
+    DatasetList = newlist;
+}
+
+void Preprocessor::removech()
+{
+    cleanStringFile(DatasetList[1], DatasetList);
+}
