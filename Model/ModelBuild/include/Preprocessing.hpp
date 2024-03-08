@@ -12,7 +12,7 @@ public:
     void printType();
     void addList(std::vector<std::string> List);
     void viewList();
-    void Combine();
+    void Combine(bool fromGithub = false);
     void Combine(FileType FT);
     void Combine(std::vector<std::string> List);
     void removeStopWords();

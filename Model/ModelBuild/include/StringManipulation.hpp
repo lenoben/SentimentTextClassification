@@ -41,7 +41,7 @@ std::string cleanString(std::string dirty);
 
 bool removeStop(std::vector<std::string> &DatasetList);
 
-void combineJsonLineByLine(std::vector<std::string> &DatasetList);
+void combineJsonLineByLine(std::vector<std::string> &DatasetList, bool github = false);
 
 void saveVectors(std::vector<std::string> &vector, std::string filename);
 

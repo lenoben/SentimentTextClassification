@@ -57,7 +57,7 @@ void Preprocessor::viewList()
     return;
 }
 
-void Preprocessor::Combine()
+void Preprocessor::Combine(bool fromGithub)
 {
     if (FT == FileType::TXTGZ)
     {
@@ -72,7 +72,7 @@ void Preprocessor::Combine()
             std::cerr << "[WARN]" << std::setw(4) << "No Lists of [<filename>].json available" << std::endl;
             return;
         }
-        combineJsonLineByLine(DatasetList);
+        combineJsonLineByLine(DatasetList, fromGithub);
         return;
     }
     if (FT == FileType::TXT)

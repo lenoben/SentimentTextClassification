@@ -147,7 +147,7 @@ bool removeStop(std::vector<std::string> &DatasetList)
     return true;
 }
 
-void combineJsonLineByLine(std::vector<std::string> &DatasetList)
+void combineJsonLineByLine(std::vector<std::string> &DatasetList, bool github)
 {
     // Bad idea; storing it all in memory
     Json hugeBuffer = Json::array();
@@ -165,9 +165,20 @@ void combineJsonLineByLine(std::vector<std::string> &DatasetList)
             if (temp_json.empty())
                 continue;
             // Taking only text and score and discarding the rest of garbage
-            std::string score = temp_json["review/score"], text = temp_json["review/text"];
+            std::string score, text;
+            if (github)
+            {
+                text = temp_json["reviewText"];
+                int score_int = temp_json["overall"];
+                score = std::to_string(score_int);
+            }
+            else
+            {
+                text = temp_json["review/text"];
+                score = temp_json["review/score"];
+            }
             temp_json["score"] = std::stof(score);
-            temp_json["text"] = cleanString(text);
+            temp_json["text"] = text;
             temp_json.erase("review/summary");
             temp_json.erase("review/score");
             temp_json.erase("review/text");
