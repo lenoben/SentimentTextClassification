@@ -12,4 +12,5 @@
 
 std::tuple<std::vector<std::string>, std::vector<int>> getVectorDataset();
 
+std::tuple<std::vector<std::string>, std::vector<int>> getVectorDatasetFromFile(std::string filename);
 #endif
