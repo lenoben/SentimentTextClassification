@@ -106,3 +106,13 @@ arma::mat convertVectorStringToMatrix(std::vector<std::string> &vector_of_string
     }
     return result;
 }
+
+arma::Row<size_t> vectorToIntRow(const std::vector<int> &vec)
+{
+    arma::Row<size_t> result(vec.size());
+    for (size_t i = 0; i < vec.size(); ++i)
+    {
+        result(i) = static_cast<size_t>(vec[i]);
+    }
+    return result;
+}

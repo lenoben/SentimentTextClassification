@@ -24,4 +24,5 @@ std::tuple<std::vector<std::string>, std::vector<int>> getVectorDatasetFromFile(
 
 arma::mat convertVectorStringToMatrix(std::vector<std::string> &vector_of_strings, EncoderType ET, TheTokenType TTT, bool saveEncoder = true, mlpack::data::TfIdfEncodingPolicy::TfTypes MDTT = mlpack::data::TfIdfEncodingPolicy::TfTypes::TERM_FREQUENCY, bool boolean = false);
 
+arma::Row<size_t> vectorToIntRow(const std::vector<int> &vec);
 #endif
