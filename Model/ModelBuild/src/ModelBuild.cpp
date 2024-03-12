@@ -116,3 +116,8 @@ arma::Row<size_t> vectorToIntRow(const std::vector<int> &vec)
     }
     return result;
 }
+
+double ComputePrecision(const size_t truePos, const size_t falsePos)
+{
+    return (double)truePos / (double)(truePos + falsePos);
+}
