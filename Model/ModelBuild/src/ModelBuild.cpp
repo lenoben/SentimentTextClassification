@@ -121,3 +121,8 @@ double ComputePrecision(const size_t truePos, const size_t falsePos)
 {
     return (double)truePos / (double)(truePos + falsePos);
 }
+
+double ComputeRecall(const size_t truePos, const size_t falseNeg)
+{
+    return (double)truePos / (double)(truePos + falseNeg);
+}
