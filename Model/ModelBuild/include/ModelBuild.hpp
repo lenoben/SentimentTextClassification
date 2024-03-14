@@ -29,4 +29,6 @@ arma::Row<size_t> vectorToIntRow(const std::vector<int> &vec);
 double ComputePrecision(const size_t truePos, const size_t falsePos);
 
 double ComputeRecall(const size_t truePos, const size_t falseNeg);
+
+double ComputeF1Score(const size_t truePos, const size_t falsePos, const size_t falseNeg);
 #endif

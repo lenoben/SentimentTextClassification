@@ -126,3 +126,10 @@ double ComputeRecall(const size_t truePos, const size_t falseNeg)
 {
     return (double)truePos / (double)(truePos + falseNeg);
 }
+
+double ComputeF1Score(const size_t truePos, const size_t falsePos, const size_t falseNeg)
+{
+    double prec = ComputePrecision(truePos, falsePos);
+    double rec = ComputeRecall(truePos, falseNeg);
+    return 2 * (prec * rec) / (prec + rec);
+}
