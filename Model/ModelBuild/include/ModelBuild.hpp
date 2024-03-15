@@ -31,4 +31,6 @@ double ComputePrecision(const size_t truePos, const size_t falsePos);
 double ComputeRecall(const size_t truePos, const size_t falseNeg);
 
 double ComputeF1Score(const size_t truePos, const size_t falsePos, const size_t falseNeg);
+
+double ComputeAccuracy(const arma::Row<size_t> &yPreds, const arma::Row<size_t> &yTrue);
 #endif

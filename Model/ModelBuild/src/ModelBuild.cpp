@@ -133,3 +133,9 @@ double ComputeF1Score(const size_t truePos, const size_t falsePos, const size_t 
     double rec = ComputeRecall(truePos, falseNeg);
     return 2 * (prec * rec) / (prec + rec);
 }
+
+double ComputeAccuracy(const arma::Row<size_t> &yPreds, const arma::Row<size_t> &yTrue)
+{
+    const size_t correct = arma::accu(yPreds == yTrue);
+    return (double)correct / (double)yTrue.n_elem;
+}
