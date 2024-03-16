@@ -139,3 +139,27 @@ double ComputeAccuracy(const arma::Row<size_t> &yPreds, const arma::Row<size_t> 
     const size_t correct = arma::accu(yPreds == yTrue);
     return (double)correct / (double)yTrue.n_elem;
 }
+
+void ClassificationReport(const arma::Row<size_t> &yPreds, const arma::Row<size_t> &yTrue)
+{
+    arma::Row<size_t> uniqs = arma::unique(yTrue);
+    std::cout << std::setw(29) << "precision" << std::setw(15) << "recall"
+              << std::setw(15) << "f1-score" << std::setw(15) << "support"
+              << std::endl
+              << std::endl;
+
+    for (auto val : uniqs)
+    {
+        size_t truePos = arma::accu(yTrue == val && yPreds == val && yPreds == yTrue);
+        size_t falsePos = arma::accu(yPreds == val && yPreds != yTrue);
+        size_t trueNeg = arma::accu(yTrue != val && yPreds != val && yPreds == yTrue);
+        size_t falseNeg = arma::accu(yPreds != val && yPreds != yTrue);
+
+        std::cout << std::setw(15) << val
+                  << std::setw(12) << std::setprecision(2) << ComputePrecision(truePos, falsePos)
+                  << std::setw(16) << std::setprecision(2) << ComputeRecall(truePos, falseNeg)
+                  << std::setw(14) << std::setprecision(2) << ComputeF1Score(truePos, falsePos, falseNeg)
+                  << std::setw(16) << truePos
+                  << std::endl;
+    }
+}
