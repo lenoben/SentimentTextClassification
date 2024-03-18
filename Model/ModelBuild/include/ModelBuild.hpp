@@ -37,4 +37,6 @@ double ComputeAccuracy(const arma::Row<size_t> &yPreds, const arma::Row<size_t> 
 void ClassificationReport(const arma::Row<size_t> &yPreds, const arma::Row<size_t> &yTrue);
 
 void pickScalarMethod(scaler_methods SM, arma::mat &train, arma::mat &test);
+
+bool areMatricesEqual(const arma::mat &mat1, const arma::mat &mat2);
 #endif

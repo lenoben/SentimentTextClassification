@@ -205,3 +205,12 @@ void pickScalarMethod(scaler_methods SM, arma::mat &train, arma::mat &test)
         break;
     }
 }
+
+bool areMatricesEqual(const arma::mat &mat1, const arma::mat &mat2)
+{
+    // Compute the sum of absolute differences between corresponding elements.
+    double sumDiff = arma::accu(arma::abs(mat1 - mat2));
+
+    // Check if the sum is very close to zero.
+    return sumDiff < 1e-10;
+}
