@@ -39,4 +39,6 @@ void ClassificationReport(const arma::Row<size_t> &yPreds, const arma::Row<size_
 void pickScalarMethod(scaler_methods SM, arma::mat &train, arma::mat &test);
 
 bool areMatricesEqual(const arma::mat &mat1, const arma::mat &mat2);
+
+bool areRowsEqual(const arma::Row<size_t> &row1, const arma::Row<size_t> &row2);
 #endif

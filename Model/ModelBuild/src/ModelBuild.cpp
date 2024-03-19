@@ -214,3 +214,12 @@ bool areMatricesEqual(const arma::mat &mat1, const arma::mat &mat2)
     // Check if the sum is very close to zero.
     return sumDiff < 1e-10;
 }
+
+bool areRowsEqual(const arma::Row<size_t> &row1, const arma::Row<size_t> &row2)
+{
+    // Compute the sum of absolute differences between corresponding elements.
+    double sumDiff = (double)arma::accu(arma::abs(row1 - row2));
+
+    // Check if the sum is very close to zero.
+    return sumDiff < 1e-10;
+}
