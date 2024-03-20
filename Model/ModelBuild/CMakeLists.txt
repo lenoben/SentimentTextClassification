@@ -13,8 +13,12 @@ file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 # Build executable
 add_executable(modelBuild ${SOURCES})
 
+find_package(Armadillo REQUIRED)
+find_package(Ensmallen REQUIRED)
+find_package(cereal REQUIRED)
+
 # Link libraries
-target_link_libraries(modelBuild PRIVATE -larmadillo -lz -lmlpack -lz -fopenmp)
+target_link_libraries(modelBuild PRIVATE -larmadillo -lmlpack -fopenmp)
 
 # Set compilation flags
 target_compile_options(modelBuild PRIVATE -Wconversion -fpermissive)
