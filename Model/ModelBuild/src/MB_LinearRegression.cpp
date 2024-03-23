@@ -22,5 +22,27 @@ namespace mf
 
         trainMat.brief_print("Train Matrix 🧩");
         trainLabel.brief_print("Test Label 🧩");
+
+        // pick scalar method
+        pickScalarMethod(SM, trainMat, testMat);
+
+        // model
+        mlpack::LinearRegression mlr(trainMat, trainLabelvec, intercept);
+        std::string modelname;
+        if (intercept)
+        {
+            modelname = "LinearRegression_" + encoderTypeToString(ET) + "_" + std::string("intercept_") + scalerMethodToString(SM);
+        }
+        else
+        {
+            modelname = "LinearRegression_" + encoderTypeToString(ET) + "_" + scalerMethodToString(SM);
+        }
+        mlpack::data::Save(modelname + "_model.bin", "LinearRegression", mlr);
+
+        mlr.Predict(testMat, pred);
+        pred.brief_print("Prediction Label");
+        mlpack::data::Save(modelname + "_pred.csv", pred);
+
+        return result;
     }
 };
