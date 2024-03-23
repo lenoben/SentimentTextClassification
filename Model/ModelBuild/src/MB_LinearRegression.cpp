@@ -43,6 +43,11 @@ namespace mf
         pred.brief_print("Prediction Label");
         mlpack::data::Save(modelname + "_pred.csv", pred);
 
+        // evaluate
+        arma::Row<size_t> predr = rowvecToRow(pred);
+        double result = ComputeAccuracy(predr, testLabel);
+        std::cout << "[INFO] " << std::setw(4) << "Accurracy - " << result << std::endl;
+        ClassificationReport(predr, testLabel);
         return result;
     }
 };
