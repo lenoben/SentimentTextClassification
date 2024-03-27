@@ -26,6 +26,11 @@ namespace mf
         mlpack::data::Save(modelname + "_pred.csv", pred);
         mlpack::data::Save(modelname + "_pred_prob.csv", prob);
 
+        // evaluate
+        double result = ComputeAccuracy(pred, testLabel);
+        std::cout << "[INFO] " << std::setw(4) << "Accurracy - " << result << std::endl;
+        ClassificationReport(pred, testLabel);
+
         return result;
     }
 };
