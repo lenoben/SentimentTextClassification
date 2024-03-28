@@ -1,4 +1,4 @@
-#include "MF_RandomForest.hpp"
+#include "MB_RandomForest.hpp"
 
 namespace mf
 {

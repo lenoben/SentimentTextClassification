@@ -1,4 +1,4 @@
-#include "MF_LinearRegression.hpp"
+#include "MB_LinearRegression.hpp"
 
 namespace mf
 {
