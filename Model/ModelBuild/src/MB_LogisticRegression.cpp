@@ -27,5 +27,14 @@ namespace mb
         prob.brief_print("pred prob");
         std::cout << "pred ncols - " << pred.n_cols << std::endl;
         std::cout << "pred nrows - " << pred.n_rows << std::endl;
+
+        // evaluate
+        double result = ComputeAccuracy(pred, testLabel);
+        std::cout << "[INFO] " << std::setw(4) << "Accurracy - " << result << std::endl;
+        ClassificationReport(pred, testLabel);
+
+        mlpack::data::Save(modelname + "_pred.csv", pred);
+        mlpack::data::Save(modelname + "_pred_prob.csv", prob);
+        return result;
     }
 }
