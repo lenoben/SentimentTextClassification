@@ -6,7 +6,7 @@
 // LOGISTIC REGRESSION
 #include <mlpack/methods/logistic_regression/logistic_regression.hpp>
 
-namespace mf
+namespace mb
 {
     double logRegressionSetup(EncoderType ET, scaler_methods SM = scaler_methods::NONE, double bound = 0.5, bool intercept = true, double penalty = 0.0);
 };

@@ -1,6 +1,6 @@
 #include "MB_LinearRegression.hpp"
 
-namespace mf
+namespace mb
 {
 
     arma::Row<size_t> rowvecToRow(const arma::rowvec &row)

@@ -6,7 +6,7 @@
 // LINEAR REGRESSION
 #include <mlpack/methods/linear_regression/linear_regression.hpp>
 
-namespace mf
+namespace mb
 {
     double linearRegressionSetup(EncoderType ET, scaler_methods SM = scaler_methods::NONE, bool intercept = true);
 };

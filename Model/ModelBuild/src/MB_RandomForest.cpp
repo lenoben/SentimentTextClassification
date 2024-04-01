@@ -1,6 +1,6 @@
 #include "MB_RandomForest.hpp"
 
-namespace mf
+namespace mb
 {
     double randomForestSetup(EncoderType ET, scaler_methods SM, int numClasses, int numTrees)
     {

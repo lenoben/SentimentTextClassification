@@ -6,7 +6,7 @@
 // RANDOM FOREST
 #include <mlpack/methods/random_forest/random_forest.hpp>
 
-namespace mf
+namespace mb
 {
     double randomForestSetup(EncoderType ET, scaler_methods SM = scaler_methods::NONE, int numClasses = 2, int numTrees = 0);
 };
