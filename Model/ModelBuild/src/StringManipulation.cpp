@@ -473,3 +473,45 @@ std::vector<std::string> file_to_vector(const std::string &filename, int length)
     file.close();
     return corpus;
 }
+
+void resaveWithLimit(size_t limit, std::vector<std::string> &DatasetList)
+{
+    for (int i = 0; i < DatasetList.size(); i++)
+    {
+        std::ifstream inputFile(DatasetList[i]);
+        if (!inputFile.is_open())
+        {
+            std::cerr << "Error opening file." << std::endl;
+            return;
+        }
+
+        std::string line;
+        std::vector<std::string> lines;
+        while (std::getline(inputFile, line))
+        {
+            lines.push_back(line);
+            if (lines.size() == limit)
+            {
+                break;
+            }
+        }
+
+        inputFile.close();
+
+        std::ofstream outputFile(DatasetList[i]);
+        if (!outputFile.is_open())
+        {
+            std::cerr << "Error opening file for writing." << std::endl;
+            return;
+        }
+
+        for (const auto &l : lines)
+        {
+            outputFile << l << std::endl;
+        }
+
+        outputFile.close();
+
+        std::cout << "[INFO] " << std::setw(4) << DatasetList[i] << " set to limit. " << limit << std::endl;
+    }
+}
