@@ -291,3 +291,10 @@ void Preprocessor::removech()
 {
     cleanStringFile(DatasetList[1], DatasetList);
 }
+
+void Preprocessor::setLimit(size_t limit)
+{
+    if (limit >= countLines(DatasetList[0]))
+        return;
+    resaveWithLimit(limit, DatasetList);
+}

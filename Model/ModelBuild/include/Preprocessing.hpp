@@ -26,6 +26,7 @@ public:
     std::vector<std::string> &getList();
     void train_test_split(double split_number = 0.2);
     void removech();
+    void setLimit(size_t limit);
 
 private:
     FileType FT;
