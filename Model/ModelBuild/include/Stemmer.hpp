@@ -12,8 +12,12 @@
 static char *s;
 static int i_max = 50; /* maximum offset in s */
 
-#define LETTER(ch) (isupper(ch) || islower(ch)) s
+#define LETTER(ch) (isupper(ch) || islower(ch))
 
+/**
+ * @brief a class for handling porter stemmer
+ *
+ */
 class stemm
 {
 private:
@@ -27,5 +31,17 @@ public:
     std::string stemWord(std::string &str);
     void stemfile(std::string inputFile, std::string outputFile);
 };
+
+stemm::stemm(/* args */)
+{
+    z = create_stemmer();
+    s = (char *)malloc(i_max + 1);
+}
+
+stemm::~stemm()
+{
+    free(s);
+    free_stemmer(z);
+}
 
 #endif
