@@ -60,4 +60,29 @@ stemm::~stemm()
     free_stemmer(z);
 }
 
+std::string stemm::stemWord(std::string &str)
+{
+    const char *cstr = str.c_str();
+    int i = 0;
+    while (true)
+    {
+        if (i == i_max)
+        {
+            i_max += INC;
+            s = (char *)realloc(s, i_max + 1);
+        }
+        // char ch = tolower(cstr[i]); /* forces lower case */
+        char ch = cstr[i];
+        s[i] = ch;
+        s[i] = cstr[i];
+        i++;
+        if (!LETTER(ch) || i == str.length())
+        {
+            break;
+        }
+    }
+    s[stem(z, s, i - 1) + 1] = 0;
+    return std::string(s);
+}
+
 #endif
