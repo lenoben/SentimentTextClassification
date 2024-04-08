@@ -85,4 +85,23 @@ std::string stemm::stemWord(std::string &str)
     return std::string(s);
 }
 
+void stemm::stemfile(std::string inputfile, std::string outputfile)
+{
+    std::ifstream inFile(inputfile);
+    if (!inFile)
+    {
+        std::cerr << "Cannot open input file!" << std::endl;
+        return;
+    }
+
+    std::ofstream outFile(outputfile);
+    if (!outFile)
+    {
+        std::cerr << "Cannot open output file!" << std::endl;
+        return;
+    }
+    inFile.close();
+    outFile.close();
+}
+
 #endif
