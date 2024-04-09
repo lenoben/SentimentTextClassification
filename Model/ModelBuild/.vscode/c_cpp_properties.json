@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include",
+                "/usr/local/include",
+                "/usr/local/include/mlpack/",
+                "/usr/include/mlpack/",
+                "/usr/include/"
+            ],
+            "defines": [],
+            "cStandard": "c17",
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}
