@@ -58,4 +58,6 @@ void equalizeLines(const std::string &inputFileName, std::ofstream &output, int 
 void equalizer(std::vector<std::string> &DatasetList);
 
 std::vector<std::string> file_to_vector(const std::string &filename, int length);
+
+std::vector<std::string> split_String(const std::string &s);
 #endif

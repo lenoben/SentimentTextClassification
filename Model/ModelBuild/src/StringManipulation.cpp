@@ -515,3 +515,15 @@ void resaveWithLimit(size_t limit, std::vector<std::string> &DatasetList)
         std::cout << "[INFO] " << std::setw(4) << DatasetList[i] << " set to limit. " << limit << std::endl;
     }
 }
+
+std::vector<std::string> split_String(const std::string &s)
+{
+    std::istringstream iss(s);
+    std::vector<std::string> tokens;
+    std::string token;
+    while (iss >> token)
+    {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
