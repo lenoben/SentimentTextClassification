@@ -21,3 +21,26 @@ arma::Row<size_t> _convertToRow(const arma::mat &matrix, double threshold)
 
     return result;
 }
+
+namespace mb
+{
+    /*
+    Models Examples
+        ---------------
+        Layers: Input layer (29 neurons) -> Fully connected layer (64 neurons) -> ReLU activation -> Fully connected layer (32 neurons) -> ReLU activation -> Output layer (1 neuron)
+        Activation Functions: ReLU for hidden layers, sigmoid for the output layer
+        Loss Function: Binary cross-entropy, mlpack::BCELoss
+        Initialization Rule: Random initialization
+        ---------------
+        Layers: Input layer (29 neurons) -> Fully connected layer (128 neurons) -> ReLU activation -> Dropout (with dropout rate 0.5) -> Fully connected layer (64 neurons) -> ReLU activation -> Dropout (with dropout rate 0.5) -> Fully connected layer (32 neurons) -> ReLU activation -> Dropout (with dropout rate 0.5) -> Output layer (1 neuron)
+        Activation Functions: ReLU for hidden layers, sigmoid for the output layer
+        Loss Function: Binary cross-entropy
+        Initialization Rule: He initialization
+        ---------------
+        Layers: Input layer (29 neurons) -> Fully connected layer (64 neurons) -> Leaky ReLU activation -> Batch normalization -> Fully connected layer (32 neurons) -> Leaky ReLU activation -> Batch normalization -> Output layer (1 neuron)
+        Activation Functions: Leaky ReLU for hidden layers, sigmoid for the output layer
+        Loss Function: Hinge loss
+        Initialization Rule: Xavier initialization
+        ---------------
+    */
+}
