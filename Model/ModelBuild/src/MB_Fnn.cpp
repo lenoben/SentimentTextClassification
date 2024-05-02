@@ -43,4 +43,19 @@ namespace mb
         Initialization Rule: Xavier initialization
         ---------------
     */
+
+    mlpack::FFN<mlpack::CrossEntropyError, mlpack::RandomInitialization> &binary_random(int numberOfCols)
+    {
+        mlpack::FFN<mlpack::CrossEntropyError, mlpack::RandomInitialization> *model = new mlpack::FFN<mlpack::CrossEntropyError, mlpack::RandomInitialization>();
+        model->Add<mlpack::Linear>(numberOfCols);
+        model->Add<mlpack::ReLU>();
+        model->Add<mlpack::Linear>(64);
+        model->Add<mlpack::ReLU>();
+        model->Add<mlpack::Linear>(32);
+        model->Add<mlpack::ReLU>();
+        model->Add<mlpack::Linear>(1);
+        model->Add<mlpack::Sigmoid>();
+
+        return *model;
+    }
 }
