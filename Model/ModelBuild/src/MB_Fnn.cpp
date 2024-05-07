@@ -58,4 +58,29 @@ namespace mb
 
         return *model;
     }
+
+    mlpack::FFN<mlpack::CrossEntropyError, mlpack::HeInitialization> &binary_he(int numberofrows)
+    {
+        mlpack::FFN<mlpack::CrossEntropyError, mlpack::HeInitialization> *model = new mlpack::FFN<mlpack::CrossEntropyError, mlpack::HeInitialization>();
+        model->Add<mlpack::Linear>(numberofrows);
+        model->Add<mlpack::Dropout>(0.5);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(32);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(64);
+        model->Add<mlpack::Dropout>(0.5);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(128);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::LogSoftMax>();
+        model->Add<mlpack::Linear>(64);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Dropout>(0.5);
+        model->Add<mlpack::Linear>(32);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(1);
+        model->Add<mlpack::Sigmoid>();
+
+        return *model;
+    }
 }
