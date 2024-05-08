@@ -83,4 +83,28 @@ namespace mb
 
         return *model;
     }
+
+    mlpack::FFN<mlpack::MeanSquaredError, mlpack::HeInitialization> &mean_he(int noOfrows)
+    {
+        mlpack::FFN<mlpack::MeanSquaredError, mlpack::HeInitialization> *model = new mlpack::FFN<mlpack::MeanSquaredError, mlpack::HeInitialization>();
+        model->Add<mlpack::Linear>(noOfrows);
+        model->Add<mlpack::Dropout>(0.5);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(32);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(64);
+        model->Add<mlpack::Dropout>(0.5);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(128);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(64);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Dropout>(0.5);
+        model->Add<mlpack::Linear>(32);
+        model->Add<mlpack::LeakyReLU>();
+        model->Add<mlpack::Linear>(1);
+        model->Add<mlpack::Sigmoid>();
+
+        return *model;
+    }
 }
