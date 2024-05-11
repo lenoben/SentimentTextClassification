@@ -132,4 +132,26 @@ namespace mb
 
         return *model;
     }
+
+    void fnnSetup(EncoderType ET, scaler_methods SM, int opt)
+    {
+        arma::Row<size_t> trainLabel, testLabel;
+        arma::mat trainMat, testMat, pred, FNN_trainLabel, FNN_testLabel;
+        std::tie(trainMat, testMat, trainLabel, testLabel) = getMatrixDataset(ET);
+
+        FNN_trainLabel = arma::conv_to<arma::mat>::from(trainLabel);
+        FNN_testLabel = arma::conv_to<arma::mat>::from(testLabel);
+
+        // pick scalar method
+        pickScalarMethod(SM, trainMat, testMat);
+
+        trainMat.brief_print("Train Matrix 🧩");
+        std::cout << "Train Matrix n_rows - " << trainMat.n_rows << std::endl;
+        std::cout << "Train Matrix n_cols - " << trainMat.n_cols << std::endl;
+        FNN_trainLabel.brief_print("Train Label Matrix 🧩");
+        std::cout << "Train Label Matrix n_rows - " << FNN_trainLabel.n_rows << std::endl;
+        std::cout << "Train Label Matrix n_cols - " << FNN_trainLabel.n_cols << std::endl;
+
+        
+    }
 }
