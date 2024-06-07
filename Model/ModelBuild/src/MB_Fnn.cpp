@@ -173,7 +173,68 @@ namespace mb
 
         mlpack::FFN<mlpack::MeanSquaredError, mlpack::HeInitialization> &model = mean_he((int)trainMat.n_rows);
         
-        model.Train(trainMat, FNN_trainLabel, ens::PrintLoss(), ens::ProgressBar(40));
+        /*
+            callbacks - https://www.ensmallen.org/docs.html#callback-documentation
+            GradClipByNorm(0.3)
+            ens::PrintLoss()
+            ens::EarlyStopAtMinLoss()
+            GradClipByValue(0, 1.3)
+            ProgressBar()
+            Report()
+            StoreBestCoordinates<ModelMatType>()
+        */
+
+        ens::Adam optimizerAdam;
+        ens::AdaDelta optimizerAda;
+        ens::StandardSGD optimizerSGD;
+        ens::Nadam optimizerNA;
+        ens::RMSProp optimizerRM;
+
+        switch (opt)
+        {
+        case 1:
+            optimizerAdam = ens::Adam(
+                STEP_SIZE,                // Step size of the optimizer.
+                BATCH_SIZE,               // Batch size. Number of data points that are used in each iteration.
+                0.9,                      // Exponential decay rate for the first moment estimates.
+                0.999,                    // Exponential decay rate for the weighted infinity norm estimates.
+                1e-8,                     // Value used to initialise the mean squared gradient parameter.
+                trainMat.n_cols * EPOCHS, // Max number of iterations.
+                STOP_TOLERANCE,           // Tolerance.
+                true);
+            model.Train(trainMat, FNN_trainLabel, optimizerAdam, ens::PrintLoss(), ens::ProgressBar(40), ens::EarlyStopAtMinLoss(20));
+            break;
+        case 2:
+            optimizerRM = ens::RMSProp(0.01, 32, 0.88, 1e-8, trainMat.n_cols * EPOCHS, -1);
+            break;
+        case 3:
+            optimizerSGD = ens::StandardSGD(
+                STEP_SIZE,                // Step size of the optimizer.
+                BATCH_SIZE,               // Batch size. Number of data points that are used in each iteration.
+                trainMat.n_cols * EPOCHS, // Max number of iterations.
+                STOP_TOLERANCE,           // Tolerance.
+                false                     // shuffle, if not visits linearly
+            );
+            model.Train(trainMat, FNN_trainLabel, optimizerSGD, ens::PrintLoss(), ens::ProgressBar(40), ens::EarlyStopAtMinLoss(20));
+            break;
+        case 4:
+            optimizerNA = ens::Nadam(
+                STEP_SIZE,                // Step size of the optimizer.
+                BATCH_SIZE,               // Batch size. Number of data points that are used in each iteration.
+                0.9,                      // Exponential decay rate for the first moment estimates.
+                0.999,                    // Exponential decay rate for the weighted infinity norm estimates.
+                1e-8,                     // Value used to initialise the mean squared gradient parameter.
+                trainMat.n_cols * EPOCHS, // Max number of iterations.
+                STOP_TOLERANCE,           // Tolerance.
+                false                     // shuffle
+            );
+            model.Train(trainMat, FNN_trainLabel, optimizerNA, ens::PrintLoss(), ens::ProgressBar(40), ens::EarlyStopAtMinLoss(20));
+            break;
+        default:
+            std::cout << "Default optimizer: " << std::endl;
+            model.Train(trainMat, FNN_trainLabel, ens::PrintLoss(), ens::ProgressBar(40));
+            break;
+        }
 
         model.Predict(testMat, pred);
         // File for saving the model.
@@ -184,5 +245,36 @@ namespace mb
         delete &model;
         mlpack::data::Save(modelname + "_pred.csv", pred);
         mlpack::data::Save(modelname + "_test.csv", FNN_testLabel);
+
+        double decisonboundary = 0.5;
+
+        arma::Row<size_t> predl = _convertToRow(pred, decisonboundary);
+        arma::mat thre = arma::zeros<arma::mat>(pred.n_rows, pred.n_cols);
+
+        for (arma::uword i = 0; i < pred.n_elem; ++i){
+            if (pred(i) >= decisonboundary){
+                thre(i) = 1.0;
+            }
+            else {
+                thre(i) = 0.0;
+            }
+        }
+        pred = thre;
+
+        pred.brief_print("FNN PREDs");
+        FNN_testLabel.brief_print("FFN TEST LABEL");
+        std::cout << "pred ncols - " << pred.n_cols << std::endl;
+        std::cout << "pred nrows - " << pred.n_rows << std::endl;
+        std::cout << "fnn testlabel ncols - " << FNN_testLabel.n_cols << std::endl;
+        std::cout << "fnn testlabel nrows - " << FNN_testLabel.n_rows << std::endl;
+
+        // Calculate MSE loss on predictions.
+        double validMSE = mlpack::SquaredEuclideanDistance::Evaluate(pred, FNN_testLabel) / (FNN_testLabel.n_elem);
+
+        std::cout << "Mean Squared Error on Prediction data points: " << validMSE << std::endl;
+
+        double result = ComputeAccuracy(predl, testLabel);
+        std::cout << "[INFO] " << std::setw(4) << "Accurracy - " << result << std::endl;
+        ClassificationReport(predl, testLabel);
     }
 }
