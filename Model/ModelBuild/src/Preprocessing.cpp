@@ -1,4 +1,8 @@
 #include "Preprocessing.hpp"
+#include "StringManipulation.hpp"
+#include "TxtgzToTxt.hpp"
+#include "TxtgzToJson.hpp"
+#include "Stemmer.hpp"
 #include <iomanip>
 
 Preprocessor::Preprocessor() : DatasetList({}){};
