@@ -48,6 +48,28 @@ int Mein_KNN<MatrixType>::class_occurrences(std::vector<std::pair<double, size_t
     return max_class;
 }
 
+template <typename MatrixType>
+int Mein_KNN<MatrixType>::Rclass_occurrences(arma::Col<double> &distances, int k)
+{
+   arma::uvec sorted_indices = arma::sort_index(distances, "ascend");
+
+    std::unordered_map<int, int> class_count;
+    for (size_t i = 0; i < k; ++i) {
+        int label = matrix_label(sorted_indices(i));
+        class_count[label]++;
+    }
+
+    int max_count = 0;
+    int max_class = -1;
+    for (const auto &pair : class_count) {
+        if (pair.second > max_count) {
+            max_count = pair.second;
+            max_class = pair.first;
+        }
+    }
+
+    return max_class;
+}
 
 template <typename MatrixType>
 Mein_KNN<MatrixType>::Mein_KNN(): k(1), Deqn(DistanceEQN::MANHATTAN) {};
