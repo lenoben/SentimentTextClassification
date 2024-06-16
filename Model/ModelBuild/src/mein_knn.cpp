@@ -23,6 +23,113 @@ arma::Col<double> Mein_KNN<MatrixType>::Euclidean_distance(MatrixType &matrix, M
         return distances;
 }
 
+template <typename MatrixType>
+arma::Col<double> Mein_KNN<MatrixType>::Cosine_distance(MatrixType &matrix, arma::Row<double> &newmatrix){
+    arma::Col<double> distances(matrix.n_cols);
+    double dotProduct, normA, normB;
+
+    for(arma::uword j = 0; j < matrix.n_cols; j++){
+        dotProduct = normA = normB = 0.0;
+
+        for(arma::uword i = 0; i < matrix.n_rows; i++){
+            if(matrix(i, j) != 0 && newmatrix(i,0) != 0){
+                dotProduct += matrix(i, j) * newmatrix(i,0);
+                normA += std::pow(matrix(i, j),2);
+                normB += std::pow(newmatrix(i),2);
+            }
+        }
+
+        normA = std::sqrt(normA);
+        normB = std::sqrt(normB);
+
+        if(normA != 0 && normB != 0){
+            //1 - cosine similarity
+            distances(j) = (dotProduct / (normA * normB));
+        }else{
+            distances(j) = 0;
+            //if normA = 0 | normB = 0, cosine similarity is 0
+        }
+    }
+
+    return distances;
+}
+
+template <typename MatrixType>
+arma::Col<double> Mein_KNN<MatrixType>::Cosine_distance(MatrixType &matrix, MatrixType &newmatrix){
+    arma::Col<double> distances(matrix.n_cols);
+    double dotProduct, normA, normB;
+
+    for(arma::uword j = 0; j < matrix.n_cols; j++){
+        dotProduct = normA = normB = 0.0;
+
+        for(arma::uword i = 0; i < matrix.n_rows; i++){
+            if(matrix(i, j) != 0 && newmatrix(i,0) != 0){
+                dotProduct += matrix(i, j) * newmatrix(i, 0);
+                normA += std::pow(matrix(i, j),2);
+                normB += std::pow(newmatrix(i, 0),2);
+            }
+        }
+
+        normA = std::sqrt(normA);
+        normB = std::sqrt(normB);
+
+        if(normA != 0 && normB != 0){
+            //1 - cosine similarity
+            distances(j) = (dotProduct / (normA * normB));
+        }else{
+            distances(j) = 0;
+            //if normA = 0 | normB = 0, cosine similarity is 0
+        }
+    }
+
+    return distances;
+}
+
+template <typename MatrixType>
+arma::Col<double> Mein_KNN<MatrixType>::CosineDis_distance(MatrixType &matrix, MatrixType &newmatrix){
+    arma::Col<double> distances(matrix.n_cols);
+    double dotProduct, normA, normB;
+
+    for(arma::uword j = 0; j < matrix.n_cols; j++){
+        dotProduct = normA = normB = 0.0;
+
+        for(arma::uword i = 0; i < matrix.n_rows; i++){
+            if(matrix(i, j) != 0 && newmatrix(i,0) != 0){
+                dotProduct += matrix(i, j) * newmatrix(i, 0);
+                normA += std::pow(matrix(i, j),2);
+                normB += std::pow(newmatrix(i, 0),2);
+            }
+        }
+
+        normA = std::sqrt(normA);
+        normB = std::sqrt(normB);
+
+        if(normA != 0 && normB != 0){
+            //1 - cosine similarity
+            distances(j) = 1 - (dotProduct / (normA * normB));
+        }else{
+            distances(j) = 1;
+        }
+    }
+
+    return distances;
+}
+
+template <typename MatrixType>
+arma::Col<double> Mein_KNN<MatrixType>::Manhattan_distance(MatrixType &matrix, MatrixType &newmatrix){
+    arma::Col<double> distances(matrix.n_cols);
+    for (arma::uword j = 0; j < matrix.n_cols; j++) {
+            double sumDiff = 0.0;
+
+            for (arma::uword i = 0; i < matrix.n_rows; i++) {
+                sumDiff += std::abs(newmatrix(i, 0) - matrix(i, j));
+            }
+
+            distances(j) = sumDiff;
+        }
+
+        return distances;
+}
 
 template <typename MatrixType>
 int Mein_KNN<MatrixType>::class_occurrences(std::vector<std::pair<double, size_t>> &distance_out, int k)

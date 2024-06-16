@@ -16,7 +16,10 @@
 
 enum DistanceEQN
 {
-    EUCLIDEAN
+    EUCLIDEAN,
+    COSINE,
+    MANHATTAN,
+    COSINE_DISSIMILARITY
 };
 
 template <typename MatrixType>
@@ -33,6 +36,14 @@ private:
     int Rclass_occurrences(arma::Col<double> &distances, int k);
 
     arma::Col<double> Euclidean_distance(MatrixType &matrix, MatrixType &newmatrix);
+
+    arma::Col<double> Cosine_distance(MatrixType &matrix, arma::Row<double> &newmatrix);
+
+    arma::Col<double> CosineDis_distance(MatrixType &matrix, MatrixType &newmatrix);
+
+    arma::Col<double> Cosine_distance(MatrixType &matrix, MatrixType &newmatrix);
+
+    arma::Col<double> Manhattan_distance(MatrixType &matrix, MatrixType &newmatrix);
 
 public:
 
