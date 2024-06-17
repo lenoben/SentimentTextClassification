@@ -51,6 +51,10 @@ public:
 
     Mein_KNN(MatrixType &matt, arma::Row<size_t> &matrow);
 
+    Mein_KNN(MatrixType &matt, arma::Row<size_t> &matrow, DistanceEQN deqn);
+
+    Mein_KNN(MatrixType &matt, arma::Row<size_t> &matrow, int kn, DistanceEQN deqn = DistanceEQN::EUCLIDEAN);
+
     int Classify(MatrixType &predmat, int k = 1, DistanceEQN deqn = DistanceEQN::EUCLIDEAN);
 
     double Evaluate(MatrixType &matt, arma::Row<size_t> &matrow);
