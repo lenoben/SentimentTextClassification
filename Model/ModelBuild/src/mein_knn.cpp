@@ -193,7 +193,27 @@ Mein_KNN<MatrixType>::Mein_KNN(MatrixType &matt, arma::Row<size_t> &matrow, int 
 template <typename MatrixType>
 int Mein_KNN<MatrixType>::Classify(MatrixType &predmat, int k, DistanceEQN deqn)
 {
-    arma::Col<double> sumdistance = Euclidean_distance(matrix, predmat);
+    arma::Col<double> sumdistance;
+    
+    switch (deqn)
+    {
+    case DistanceEQN::EUCLIDEAN:
+        sumdistance = Euclidean_distance(matrix, predmat);
+        break;
+    case DistanceEQN::COSINE:
+        sumdistance = Cosine_distance(matrix, predmat);
+        break;
+    case DistanceEQN::MANHATTAN:
+        sumdistance = Manhattan_distance(matrix, predmat);
+        break;
+    case DistanceEQN::COSINE_DISSIMILARITY:
+        sumdistance = Manhattan_distance(matrix, predmat);
+        break;
+    
+    default:
+        sumdistance = Euclidean_distance(matrix, predmat);
+        break;
+    }
 
     std::vector<std::pair<double, size_t>> dist_label;
     for (size_t j = 0; j < matrix_label.n_cols; j++)
